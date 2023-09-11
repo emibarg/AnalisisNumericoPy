@@ -1,4 +1,6 @@
-def newton(f,Df,x0,epsilon,max_iter):
+from tabulate import tabulate
+
+def newton(f, Df, x0, epsilon, max_iter):
     '''Approximate solution of f(x)=0 by Newton's method.
 
     Parameters
@@ -32,23 +34,31 @@ def newton(f,Df,x0,epsilon,max_iter):
     Found solution after 5 iterations.
     1.618033988749989
     '''
+    table = []
+
     xn = x0
-    for n in range(0,max_iter):
+    for n in range(0, max_iter):
         fxn = f(xn)
+        row = [n, xn, fxn]
+        table.append(row)
+        
         if abs(fxn) < epsilon:
-            print('Found solution after',n,'iterations.')
-            print(xn)
-            print("f(xn)= ")
-            print(f(xn))
+            print(tabulate(table, headers=["Iteration", "x", "f(x)"]))
+            print('Found solution after', n, 'iterations.')
             return xn
+        
         Dfxn = Df(xn)
         if Dfxn == 0:
+            print(tabulate(table, headers=["Iteration", "x", "f(x)"]))
             print('Zero derivative. No solution found.')
             return None
-        xn = xn - fxn/Dfxn
+        
+        xn = xn - fxn / Dfxn
+    
+    print(tabulate(table, headers=["Iteration", "x", "f(x)"]))
     print('Exceeded maximum iterations. No solution found.')
     return None
-f = lambda x: (4*x**3)+ 3*x -3
-dF = lambda x: 12*x**2 + 3
-newton(f, dF,1, 1e-8,10)
 
+f = lambda x: (4 * x**3) + 3 * x - 3
+dF = lambda x: 12 * x**2 + 3
+newton(f, dF, 1, 1e-8, 10)
