@@ -23,6 +23,9 @@ def gaussian_elimination(A, b):
     # Augmenting the matrix A with vector b
     Ab = np.column_stack((A, b))
 
+    print("Initial Augmented Matrix:")
+    print(Ab)
+
     # Forward elimination
     for i in range(n):
         # Partial pivoting to avoid division by small numbers
@@ -35,9 +38,15 @@ def gaussian_elimination(A, b):
 
         Ab[i, :] = Ab[i, :] / pivot
 
+        print(f"\nStep {i + 1} - Pivot Row {i + 1}:")
+        print(Ab)
+
         for j in range(i + 1, n):
             factor = Ab[j, i]
             Ab[j, :] -= factor * Ab[i, :]
+
+        print(f"\nStep {i + 1} - Elimination:")
+        print(Ab)
 
     # Back substitution
     x = np.zeros(n)
@@ -52,4 +61,4 @@ def gaussian_elimination(A, b):
 A = np.array([[2, 1, -1], [1, 3, 2], [3, 2, -3]], dtype=float)
 b = np.array([8, 10, 0], dtype=float)
 x = gaussian_elimination(A, b)
-print("Solution x:", x)
+print("\nSolution x:", x)
