@@ -57,8 +57,9 @@ def cubic_spline_natural(Xi, Yi):
     return results
 
 # Example usage:
-Xi = [0.0, 1.0, 2.0, 3.0]
-Yi = [1.0, 2.7182, 7.3891, 20.0855]
+Xi = [0.5, 1.0, 1.5, 2.0, 2.5, 3.0]
+Yi = [1.0, 2.1190, 2.9100, 3.9450, 5.72, 8.6950]
+
 result = cubic_spline_natural(Xi, Yi)
 
 for i, poly in enumerate(result):
