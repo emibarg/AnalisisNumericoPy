@@ -43,14 +43,13 @@ def gauss_seidel(A, b, x0, epsilon, max_iter):
     return x
 
 # Example usage:
-A = np.array([[4, -1, 0, 3],
-              [1, 15.5, 3, 8],
-              [0, -1.3, -4, 1.1],
-              [14, 5, -2, 30]], dtype=float)
-b = np.array([1, 1, 1, 1], dtype=float)
+A = np.array([[7, 3, 2],
+              [2, -8, 7],
+              [5, -2, 9]], dtype=float)
+b = np.array([7, 6,3], dtype=float)
 x0 = np.zeros(len(b), dtype=float)
-epsilon = 1e-6
-max_iter = 50
+epsilon = 1e-4
+max_iter = 100
 
 x = gauss_seidel(A, b, x0, epsilon, max_iter)
 print("\nSolution x:")

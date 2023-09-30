@@ -1,5 +1,5 @@
 import numpy as np
-
+import math
 def bisection_method(func, a, b, err):
     def f(x):
         return eval(func)
@@ -41,7 +41,7 @@ def barrerfunc(func, a, b, step, err):
     return roots
 
 # Example usage
-roots = barrerfunc("-0.874*x**2 + 1.750*x + 2.627", -10, 10, 0.3, 0.001)
+roots = barrerfunc("math.e**(0.5*x) - 5", 0, 30, 0.3, 0.001)
 
 # Print the table of iteration results
 for i, (root, results) in enumerate(roots):

@@ -1,5 +1,5 @@
 from tabulate import tabulate
-
+import math
 def newton(f, Df, x0, epsilon, max_iter):
     '''Approximate solution of f(x)=0 by Newton's method.
 
@@ -59,6 +59,6 @@ def newton(f, Df, x0, epsilon, max_iter):
     print('Exceeded maximum iterations. No solution found.')
     return None
 
-f = lambda x: (4 * x**3) + 3 * x - 3
-dF = lambda x: 12 * x**2 + 3
-newton(f, dF, 1, 1e-8, 10)
+f = lambda x: math.e**(0.5*x) - 5
+dF = lambda x: (math.e**(x/2))/2
+newton(f, dF, 3.15, 1e-3, 20)

@@ -62,9 +62,36 @@ def newton_interpolation_polynomial(x, coef_table):
 
     return polynomial_str
 
+def evaluate_newton_interpolation(x_eval, x_data, coef_table):
+    """
+    Evaluate the Newton interpolation polynomial at a specific value x_eval.
+
+    Parameters:
+    x_eval: float
+        The value at which to evaluate the polynomial.
+    x_data: numpy.ndarray
+        Array of x-coordinates of data points.
+    coef_table: pd.DataFrame
+        The divided difference table.
+
+    Returns:
+    float
+        The value of the polynomial at x_eval.
+    """
+    n = len(x_data)
+    result = 0.0
+
+    for i in range(n):
+        term = coef_table.iloc[0, i]
+        for j in range(i):
+            term *= (x_eval - x_data[j])
+        result += term
+
+    return result
+
 # Example usage:
-x_data = np.array([1.0, 2.0, 3.0, 4.0, 5.0])
-y_data = np.array([0.0, 1.0, 0.0, 1.0, 0.0])
+x_data = np.array([0.0, 1.0, 2.0, 3.0])
+y_data = np.array([-4.0, -3.3513, -2.2817, -0.5183])
 
 coef_table = newton_interpolation_table(x_data, y_data)
 print("Divided Difference Coefficients Table:")
@@ -73,3 +100,8 @@ print(coef_table)
 polynomial = newton_interpolation_polynomial(x_data, coef_table)
 print("Newton Interpolation Polynomial:")
 print(polynomial)
+
+# Evaluate the polynomial at a specific value, e.g., x_eval = 1.5 
+x_eval = 1.5
+y_eval = evaluate_newton_interpolation(x_eval, x_data, coef_table)
+print("P({0}) = {1}".format(x_eval, y_eval))
