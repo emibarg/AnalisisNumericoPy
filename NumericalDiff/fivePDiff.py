@@ -1,47 +1,27 @@
-import math
-
-def five_point_differentiation(f, x, h=1e-5):
-    """
-    Approximate the derivative of a function at a point using five-point differentiation.
-
-    :param f: The function for which to estimate the derivative.
-    :param x: The point at which to estimate the derivative.
-    :param h: The step size (default is 1e-5).
-    :return: The estimated derivative.
-    """
-    derivative = (f(x - 2*h) - 8*f(x - h) + 8*f(x + h) - f(x + 2*h)) / (12 * h)
-    return derivative
-
-if __name__ == "__main__":
-    # Allow the user to input the function as a string
-    function_str = input("Enter the function f(x) (e.g., 'math.exp(x) * math.cos(x)'): ")
-
-    try:
-        # Parse and evaluate the user-entered function
-        def user_function(x):
-            return eval(function_str)
-    except Exception as e:
-        print(f"Error: {e}")
-        exit(1)
-
-    # Allow the user to input the interval bounds
-    a = float(input("Enter the left bound of the interval: "))
-    b = float(input("Enter the right bound of the interval: "))
-
-    # Allow the user to input the step size
-    step_size = float(input("Enter the step size: "))
-
-    # Perform five-point differentiation and store intermediate results
-    results = []
-    x0 = a
-    while x0 <= b:
-        estimated_derivative = five_point_differentiation(user_function, x0, step_size)
-        results.append((x0, estimated_derivative))
-        x0 += step_size
-
-    # Print the table of derivatives within the interval
-    print("\nDerivatives within the Interval:")
-    print("    x     | Estimated Derivative")
-    print("-" * 30)
-    for x, derivative in results:
-        print(f"{x:^10.4f} | {derivative:^20.6f}")
+##Five Point Difference Method
+import numpy as np
+def fivePDiff(X,Y):
+    size = len(X)
+    resultados = np.zeros(size)
+    for i in range(size):
+        valor = 0
+        #Centrada
+        if i+2 < size and i-2 >= 0:
+            valor += -Y[i+2] + 8*Y[i+1] - 8*Y[i-1] + Y[i-2]
+            valor /= 12*(X[i+1] - X[i])
+        elif i+3 < size and i-1 >= 0:
+            #Progresiva
+            valor += -25*Y[i] + 48*Y[i+1] - 36*Y[i+2] + 16*Y[i+3] - 3*Y[i+4]
+            valor /= 12*(X[i+1] - X[i])
+        elif i+1 < size and i-3 >= 0:
+            #Regresiva
+            valor += 25*Y[i] - 48*Y[i-1] + 36*Y[i-2] - 16*Y[i-3] + 3*Y[i-4]
+            valor /= 12*(X[i+1] - X[i])
+        resultados[i] = valor
+    print("{:<10} | {:<10} | {:<10}".format("Xi", "f(Xi)", "f'(Xi)"))
+    for i in range(size):
+        print("{:<10} | {:<10} | {:<10}".format(X[i], Y[i], resultados[i]))
+#Example usage
+X = [0, 0.10, 0.20, 0.30, 0.40, 0.50, 0.60, 0.70]
+Y = [1.0, 1.09965, 1.19706, 1.28957, 1.37406,1.44689,1.50386,1.54020]
+fivePDiff(X,Y)
