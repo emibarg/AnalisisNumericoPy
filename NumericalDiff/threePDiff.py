@@ -1,10 +1,11 @@
 import numpy as np
+from tabulate import tabulate
 
 def threePDiff(X, Y):
     size = len(X)
     resultados = np.zeros(size)
 
-    print("{:<10} | {:<10} | {:<10} | {:<10}".format("Xi", "f(Xi)", "f'(Xi)", "Formula"))
+    table = [["Xi", "f(Xi)", "f'(Xi)", "Formula"]]
     for i in range(size):
         valor = 0
         formula = ""
@@ -27,9 +28,11 @@ def threePDiff(X, Y):
 
         resultados[i] = valor
 
-        print("{:<10} | {:<10} | {:<10} | {:<10}".format(X[i], Y[i], resultados[i], formula))
+        table.append([X[i], Y[i], resultados[i], formula])
+
+    print(tabulate(table, headers='firstrow', tablefmt='fancy_grid'))
 
 # Example usage
-X = [0.0000 ,0.5000, 1.0000, 1.5000, 2.0000]
-Y = [0.0000, 0.4207, 0.4546, 0.0706, -0.3784]
+X = [0.0000 ,0.1000, 0.2000, 0.3000, 0.4000, 0.5000, 0.6000, 0.7000]
+Y = [1.0000, 1.09965,1.19706, 1.28957, 1.37406, 1.44689, 1.50386, 1.54020]
 threePDiff(X, Y)

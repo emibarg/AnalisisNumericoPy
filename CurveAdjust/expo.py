@@ -2,10 +2,10 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
-
+##Exponential Regression
 # Given data points
-xi = np.array([0, 1, 2, 3])  # X values
-yi = np.array([1,2.7182, 7.3891, 20.0855])  # Y values
+xi = np.array([0.05, 0.4, 0.8, 1.2, 1.6, 2.0, 2.4])# X values
+yi = np.array([550 ,750, 1000, 1400, 2000, 2700, 3750])  # Y values
 
 # Define the exponential model function
 def exponential_model(x, a, b):

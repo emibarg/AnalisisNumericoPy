@@ -1,6 +1,6 @@
 import numpy as np
 import math
-
+from tabulate import tabulate
 
 def RK3(h, inicio, final, Y0, f):
     """
@@ -28,8 +28,8 @@ def RK3(h, inicio, final, Y0, f):
     K2[-1] = f(x[-1] + h/2, y[-1] + K1[-1] * h/2)
     K3[-1] = f(x[-1] + h, y[-1] - K1[-1] * h + 2 * K2[-1] * h)
     return x, y, K1, K2, K3
-##Example usage
 
+# Example usage:
 def f(x, y):
     return math.e**(0.8*x) - 0.5*y
 
@@ -38,15 +38,10 @@ final = 4
 Y0 = 2
 h = 0.1
 
-x, y, K1, K2,K3 = RK3(h, inicio, final, Y0, f)
+x, y, K1, K2, K3 = RK3(h, inicio, final, Y0, f)
 
-print("x values:")
-print(x)
-print("y values:")
-print(y)
-print("K1 values:")
-print(K1)
-print("K2 values:")
-print(K2)
-print("K3 values:")
-print(K3)
+# Format the output as a table
+table = [['x', 'y', 'K1', 'K2', 'K3']]
+for i in range(len(x)):
+    table.append([f'{x[i]:.1f}', f'{y[i]:.4f}', f'{K1[i]:.4f}', f'{K2[i]:.4f}', f'{K3[i]:.4f}'])
+print(tabulate(table, headers='firstrow', tablefmt='fancy_grid'))

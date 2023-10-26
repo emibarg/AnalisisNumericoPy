@@ -1,9 +1,10 @@
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
 # Given data points
-xi = np.array([1, 2, 3, 4, 5])  # X values
-yi = np.array([0, 1, 0, 1, 0])  # Y values
+xi = np.array([1, 2, 2.5, 4, 6, 8, 8.5])# X values
+yi = np.array([0.4, 0.7, 0.8, 1, 1.2, 1.3, 1.4])  # Y values
 
 # Calculate the means of X and Y
 mean_x = np.mean(xi)
@@ -29,3 +30,19 @@ print(df)
 # Print the slope (m) and intercept (b)
 print(f"\nSlope (m): {m:.2f}")
 print(f"Intercept (b): {b:.2f}")
+
+# Create a scatter plot of the data
+plt.scatter(xi, yi)
+
+# Add the best-fit line to the plot
+x = np.linspace(np.min(xi), np.max(xi), 100)
+y = m * x + b
+plt.plot(x, y, color='red')
+
+# Add labels and a title to the plot
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.title('Linear Regression')
+
+# Show the plot
+plt.show()

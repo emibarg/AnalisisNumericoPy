@@ -1,5 +1,6 @@
 import numpy as np
 import math
+from tabulate import tabulate
 
 def euler(x0, y0, h, n, f):
     """
@@ -30,6 +31,8 @@ h = 0.1
 n = 40
 x, y = euler(x0, y0, h, n, f)
 
-print("x values\t y values")
+# Format the output as a table
+table = [['x', 'y']]
 for i in range(len(x)):
-    print("{:.2f}\t\t {:.4f}".format(x[i], y[i]))
+    table.append([f'{x[i]:.2f}', f'{y[i]:.4f}'])
+print(tabulate(table, headers='firstrow', tablefmt='fancy_grid'))

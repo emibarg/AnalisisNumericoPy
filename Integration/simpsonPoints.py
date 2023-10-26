@@ -1,5 +1,11 @@
+##Simpson method for integration with points 
+##X = list of points
+##Y = list of f(X)
+##Returns the integral
+##Also returns a table with the calculations with i, Xi, f(Xi)
 import numpy as np
 import math
+from tabulate import tabulate
 
 def simpson(X, Y):
     size = len(X)
@@ -7,9 +13,11 @@ def simpson(X, Y):
     h /= size - 1
     sum = 0
 
-    print("{:<10} | {:<10} | {:<10}".format("i", "Xi", "f(Xi)"))
+    table = [["i", "Xi", "f(Xi)"]]
     for i in range(size):
-        print("{:<10} | {:<10} | {:<10}".format(i, X[i], Y[i]))
+        table.append([i, X[i], Y[i]])
+
+    print(tabulate(table, headers='firstrow', tablefmt='fancy_grid'))
 
     for i in range(1, size - 1):
         if i % 2 == 0:
